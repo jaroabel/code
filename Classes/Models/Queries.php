@@ -38,9 +38,6 @@ class Queries extends \Classes\Config\Dbconn {
     // insert new user (create new account)
     public function add_user( $data ) {
 
-        //echo "In add_user query function<br>";
-       // print_r( $data );
-       // die();
         try {
             $stmt = $this->conn->prepare("INSERT INTO users (fname, lname, username, email, password, rank ) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssi", $data['fname'], $data['lname'], $data['username'], $data['email'], $data['password'], $data['rank']);
@@ -55,11 +52,33 @@ class Queries extends \Classes\Config\Dbconn {
         return $insert_id;
     }
 
+    // Find single user
     public function find_user( $email ) {
 
         try{
             $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->bind_param( "s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                $row = $result->num_rows;
+            } else {
+                $row = $result->fetch_assoc();
+            }
+            $stmt->close();
+        } catch(\Exception $e) {
+            echo $e->__toString();
+            die();
+        }
+        return $row;
+    }
+
+    // Find single user
+    public function get_all_user() {
+
+        try{
+            $stmt = $this->conn->prepare("SELECT * FROM users");
             $stmt->execute();
             $result = $stmt->get_result();
 

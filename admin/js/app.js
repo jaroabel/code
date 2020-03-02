@@ -8,13 +8,17 @@ var app = new Vue({
       password: '',
       fname: '',
       lname: '',
-      rank: ''
+      rank: '',
+      findall: '',
+
+      showusers: []
     },
     methods: {
         mouseleave: function () {
 
         },
 
+        /* Check if user exist, if not add new user */
         checkNewUser: function () {
 
             this.fname    = document.querySelector("#fname").value;
@@ -40,21 +44,56 @@ var app = new Vue({
               })
               .then((response) => {
                     app.message = response.data;
-                    this.clearForm();
+                    this.clearForm('addForm');
                     console.log(response);
                 }, (error) => {
                   console.log(error);
                 });
         },
 
-        clearForm: function () {
+        /* Clear form */
+        clearForm: function ( clear ) {
 
-            document.querySelector("#fname").value = "";
-            document.querySelector("#lname").value = "";
-            document.querySelector("#email").value = "";
-            document.querySelector("#username").value = "";
-            document.querySelector("#password").value = "";
-            document.querySelector("#rank").value = ""; 
-        } 
+            if( clear == "addForm" ) {
+                document.querySelector("#fname").value      = "";
+                document.querySelector("#lname").value      = "";
+                document.querySelector("#email").value      = "";
+                document.querySelector("#username").value   = "";
+                document.querySelector("#password").value   = "";
+                document.querySelector("#rank").value       = ""; 
+            }
+            
+            if( clear == "finduser" ) {
+                document.querySelector("#email").value = "";
+                document.querySelector("#findall").checked = false;               
+            }
+            
+
+        },
+
+        /* Search for a single user or list all users */
+        searchUser: function () {
+
+            this.email      = document.querySelector("#email").value;
+            this.findall    = document.querySelector("#findall").value;
+            
+            const params = {
+                email:   this.email,
+                findall: this.findall 
+            };
+
+           // alert( "Submit info ==> " + this.email + " ==== " + this.findall  );
+            axios.post('/admin/vue_search_user.php', params, {
+                headers: {
+                    'content-type': 'application/json',
+                },
+              })
+              .then((response) => {
+                    app.showusers = response.data.users;
+                    console.dir(app.showusers);
+                }, (error) => {
+                  console.log(error);
+                });
+        },
     }
   });
