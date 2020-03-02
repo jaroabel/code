@@ -54,7 +54,7 @@ class Queries extends \Classes\Config\Dbconn {
 
     // Find single user
     public function find_user( $email ) {
-
+        $users = [];
         try{
             $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->bind_param( "s", $email);
@@ -64,19 +64,23 @@ class Queries extends \Classes\Config\Dbconn {
             if ($result->num_rows === 0) {
                 $row = $result->num_rows;
             } else {
-                $row = $result->fetch_assoc();
+                //$row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $row);
+                }
             }
             $stmt->close();
         } catch(\Exception $e) {
             echo $e->__toString();
             die();
         }
-        return $row;
+        return $users;
     }
 
     // Find single user
     public function get_all_user() {
 
+        $users = [];
         try{
             $stmt = $this->conn->prepare("SELECT * FROM users");
             $stmt->execute();
@@ -85,14 +89,17 @@ class Queries extends \Classes\Config\Dbconn {
             if ($result->num_rows === 0) {
                 $row = $result->num_rows;
             } else {
-                $row = $result->fetch_assoc();
+                //$row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $row);
+                }
             }
             $stmt->close();
         } catch(\Exception $e) {
             echo $e->__toString();
             die();
         }
-        return $row;
+        return $users;
     }
 
 }

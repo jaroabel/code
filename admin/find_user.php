@@ -27,23 +27,24 @@ include('includes/header.php');
                     <td>
                     <div class="form-inline">
                         <div class="form-group mb-2">
-                            <label for="email">Find a single user:</label>
+                            <label for="email">Enter email to find a user:</label>
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
                             <input type="text" class="form-control" id="email" value="" placeholder="email@example.com">
                         </div>
-                        <div class="form-group mb-2">
-                        <label for="findall">(OR) Check to list all users:</label>
-                        </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                            <input class="form-check-input" type="radio" name="findall" id="findall" value="1">
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-2" v-on:click="searchUser">Find</button>
+                        <button type="submit" class="btn btn-primary mb-2" v-on:click="searchUser('findemail')">Find</button>
                         &nbsp;
                         <button type="submit" class="btn btn-secondary mb-2" v-on:click="clearForm('finduser')">Clear</button>
                     </div>
                     </td>
-                    <td></td>
+                    <td>
+                        <div class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2">
+                                <label for="getall"> Click here to list all users:</label>
+                        </div>
+                            <button type="submit" name="getall" class="btn btn-primary mb-2" v-on:click="searchUser('findall')">List all users</button>
+                        </div>
+                    </td>
                     </tr>
                 </tbody>
             </table>

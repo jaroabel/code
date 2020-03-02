@@ -9,7 +9,7 @@ var app = new Vue({
       fname: '',
       lname: '',
       rank: '',
-      findall: '',
+      action: '',
 
       showusers: []
     },
@@ -72,17 +72,15 @@ var app = new Vue({
         },
 
         /* Search for a single user or list all users */
-        searchUser: function () {
+        searchUser: function ( click_action) {
 
             this.email      = document.querySelector("#email").value;
-            this.findall    = document.querySelector("#findall").value;
             
             const params = {
                 email:   this.email,
-                findall: this.findall 
+                action: click_action
             };
 
-           // alert( "Submit info ==> " + this.email + " ==== " + this.findall  );
             axios.post('/admin/vue_search_user.php', params, {
                 headers: {
                     'content-type': 'application/json',
