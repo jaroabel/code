@@ -58,20 +58,51 @@ include('includes/header.php');
                     <th scope="col">Last</th>
                     <th scope="col">Email</th>
                     <th scope="col">Rank</th>
+                    <th scope="col">&nbsp;</th>
                     </tr>
                 </thead>
-                
-                    <tr v-for="user in showusers">
+                    <tr>
+                        <td colspan="5" v-if="!arr_result">
+                            <div class="alert alert-warning" role="alert">
+                                This email address " {{ email }} " dosn't exist in our record!
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    
+                    <tr v-for="user in showusers.slice(fnum, snum)">
                         <th scope="row">{{ user.id }}</th>
                         <td>{{ user.fname }}</td>
                         <td>{{ user.lname }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.rank }}</td>
+                        <td class="align-right">
+                            <div class="form-inline">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="getUserForModal(user.id, 'getuser')">Update</button>
+                                &nbsp; 
+                                <button type="button" class="btn btn-danger" v-on:click="getUserForModal(user.id, 'delete')">Delete</button>
+                            </div>
+                        </td>
                     </tr>
-                
             </table>
+
             <!-- End result table -->
             </div>
+            <table class="table" v-if="arr_length > 3">
+                <tr>
+
+                        <td class="align-right">
+                            <div class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="getall"> Total user in record: <strong>{{ arr_length }}</strong></label>
+                                </div>
+                                <button type="button" class="btn btn-secondary" v-on:click="navigateSearch( fnum, snum, 'prev')" v-if="fnum >= step">Previous</button> 
+                                &nbsp; 
+                                <button type="button" class="btn btn-secondary" v-on:click="navigateSearch( fnum, snum, 'next')" v-if="snum < arr_length">Next</button>
+                            </div>
+                        </td>
+                </tr>
+            </table>
         </div>
       <!-- End search section -->
       
@@ -81,7 +112,27 @@ include('includes/header.php');
     </div>
   </div>
 
-
+<!-- Start Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ modaluser.id }} == AND == {{ modaluser.fname }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" v-on:click="getUserForModal(modaluser.id, 'update')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 </div>
 
 <?php

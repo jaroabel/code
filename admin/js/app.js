@@ -11,7 +11,16 @@ var app = new Vue({
       rank: '',
       action: '',
 
-      showusers: []
+      /* Array var */
+      arr_result: true,
+      arr_length: 0,
+      fnum : 0,
+      snum : 3,
+
+      step: 3,
+
+      showusers: [],
+      modaluser: []
     },
     methods: {
         mouseleave: function () {
@@ -21,20 +30,20 @@ var app = new Vue({
         /* Check if user exist, if not add new user */
         checkNewUser: function () {
 
-            this.fname    = document.querySelector("#fname").value;
-            this.lname    = document.querySelector("#lname").value;
-            this.email    = document.querySelector("#email").value;
-            this.username = document.querySelector("#username").value;
-            this.password = document.querySelector("#password").value;
-            this.rank     = document.querySelector("#rank").value;
+            var ufname  = document.querySelector("#fname").value;
+            var ulname  = document.querySelector("#lname").value;
+            var uemail  = document.querySelector("#email").value;
+            var uname   = document.querySelector("#username").value;
+            var upass   = document.querySelector("#password").value;
+            var urank   = document.querySelector("#rank").value;
             
             const params = {
-                fname:    this.fname,
-                lname:    this.lname, 
-                email:    this.email,
-                username: this.username ,
-                password: this.email,
-                rank:     this.rank,
+                fname:    ufname,
+                lname:    ulname, 
+                email:    uemail,
+                username: uname ,
+                password: upass,
+                rank:     urank,
             };
 
             axios.post('/admin/vue_check_user.php', params, {
@@ -64,8 +73,12 @@ var app = new Vue({
             }
             
             if( clear == "finduser" ) {
-                document.querySelector("#email").value = "";
-                document.querySelector("#findall").checked = false;               
+
+                document.querySelector("#email").value = ""; 
+                this.arr_result = true;
+                this.email = '';
+                this.arr_length = 0;   
+                this.showusers = [];      
             }
             
 
@@ -74,10 +87,10 @@ var app = new Vue({
         /* Search for a single user or list all users */
         searchUser: function ( click_action) {
 
-            this.email      = document.querySelector("#email").value;
+            var uemail = document.querySelector("#email").value;
             
             const params = {
-                email:   this.email,
+                email:  uemail,
                 action: click_action
             };
 
@@ -88,10 +101,59 @@ var app = new Vue({
               })
               .then((response) => {
                     app.showusers = response.data.users;
+                    if(app.showusers.length < 1){
+
+                        app.arr_length = 0;
+                        app.arr_result = false;
+                        app.email = uemail;
+
+                    } else {
+
+                        app.arr_length = app.showusers.length;
+                        app.arr_result = true;
+                        app.email = '';
+                    }
                     console.dir(app.showusers);
                 }, (error) => {
                   console.log(error);
                 });
         },
+
+        /* get user data for modal */
+        getUserForModal: function( id, action) {
+            //modaluser
+            
+            const params = {
+                uid:  id,
+                action: action
+            };
+
+            axios.post('/admin/vue_update_delete.php', params, {
+                headers: {
+                    'content-type': 'application/json',
+                },
+              })
+              .then((response) => {
+                    app.modaluser = response.data.user;
+                    console.dir(app.modaluser);
+                }, (error) => {
+                  console.log(error);
+                });
+        },
+
+        /* Set 'Previous' and 'Next' button for user list display on page */
+        navigateSearch: function ( prev, next, action ){
+
+            if( action == "prev" ) {
+                this.fnum = prev - this.step;
+                this.snum = next - this.step;
+            }
+            if( action == "next" ) {
+                this.fnum = prev + this.step;
+                this.snum = next + this.step;
+            }
+        }
+
+
     }
   });

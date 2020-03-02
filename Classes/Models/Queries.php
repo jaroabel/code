@@ -52,7 +52,7 @@ class Queries extends \Classes\Config\Dbconn {
         return $insert_id;
     }
 
-    // Find single user
+    // Find single user by email
     public function find_user( $email ) {
         $users = [];
         try{
@@ -77,7 +77,32 @@ class Queries extends \Classes\Config\Dbconn {
         return $users;
     }
 
-    // Find single user
+    // Find single user by ID
+    public function find_user_by_id( $id ) {
+        $users = [];
+        try{
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
+            $stmt->bind_param( "i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                $row = $result->num_rows;
+            } else {
+                //$row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $row);
+                }
+            }
+            $stmt->close();
+        } catch(\Exception $e) {
+            echo $e->__toString();
+            die();
+        }
+        return $users;
+    }
+
+    // Get all user
     public function get_all_user() {
 
         $users = [];

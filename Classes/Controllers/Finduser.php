@@ -9,9 +9,11 @@ class Finduser extends \Classes\Models\Queries {
 
         $arr = [];
         
+        $email = trim( $data['email'] );
+
         switch ($data['action']) {
             case 'findemail':
-                $arr['users'] = $this->find_user( $data['email'] );
+                $arr['users'] = $this->find_user( $email );
                 break;          
             case 'findall':
                 $arr['users']  = $this->get_all_user();
