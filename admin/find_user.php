@@ -77,10 +77,11 @@ include('includes/header.php');
                         <td>{{ user.email }}</td>
                         <td>{{ user.rank }}</td>
                         <td class="align-right">
-                            <div class="form-inline">
+                            <div class="form-inline"> 
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="getUserForModal(user.id, 'getuser')">Update</button>
                                 &nbsp; 
-                                <button type="button" class="btn btn-danger" v-on:click="getUserForModal(user.id, 'delete')">Delete</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeleteUser" :value="user.id">Delete</button>
+                                
                             </div>
                         </td>
                     </tr>
@@ -112,27 +113,131 @@ include('includes/header.php');
     </div>
   </div>
 
-<!-- Start Modal -->
+<!-- Start Modal Update-->
+<template>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update user</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        {{ modaluser.id }} == AND == {{ modaluser.fname }}
+          <template  v-for="toupdate in modalusers">
+              <!-- <form class="text-center border border-light p-5"> -->
+                <div class="text-center border border-light p-5">
+
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <!-- First name -->
+                            <input name="fname" type="text" id="fname" class="form-control" :value="toupdate.fname">
+                        </div>
+                        <div class="col">
+                            <!-- Last name -->
+                            <input name="lname" type="text" id="lname" class="form-control" :value="toupdate.lname">
+                        </div>
+                    </div>
+
+                    <!-- E-mail -->
+                    <input name="email" type="email" id="email" class="form-control mb-4" :value="toupdate.email">
+
+                    <!-- Username -->
+                    <input name="username" type="input" id="username" class="form-control mb-4" :value="toupdate.username">
+
+                    <!-- User permission rank -->
+                
+                    <select class="form-control" id="rank" name="rank">
+                    <option value="">Select User permission</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    </select>
+
+
+                    <!-- Sign up button -->
+                    <input type="hidden" name="action" :value="toupdate.id"> 
+
+                    <hr>
+                </div> 
+                <!-- </form> -->
+          </template>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" v-on:click="getUserForModal(modaluser.id, 'update')">Save changes</button>
+        <button type="button" class="btn btn-primary" v-on:click="getUserForModal(modalusers.id, 'update')">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-<!-- End Modal -->
+</template>
+<!-- End Modal update-->
+
+<!-- Start Modal Delete-->
+<template>
+<div class="modal fade" id="ModalDeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <template  v-for="toupdate in modalusers">
+              <!-- <form class="text-center border border-light p-5"> -->
+                <div class="text-center border border-light p-5">
+
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <!-- First name -->
+                            <input name="fname" type="text" id="fname" class="form-control" :value="toupdate.fname">
+                        </div>
+                        <div class="col">
+                            <!-- Last name -->
+                            <input name="lname" type="text" id="lname" class="form-control" :value="toupdate.lname">
+                        </div>
+                    </div>
+
+                    <!-- E-mail -->
+                    <input name="email" type="email" id="email" class="form-control mb-4" :value="toupdate.email">
+
+                    <!-- Username -->
+                    <input name="username" type="input" id="username" class="form-control mb-4" :value="toupdate.username">
+
+                    <!-- User permission rank -->
+                
+                    <select class="form-control" id="rank" name="rank">
+                    <option value="">Select User permission</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    </select>
+
+
+                    <!-- Sign up button -->
+                    <input type="hidden" name="action" :value="toupdate.id"> 
+
+                    <hr>
+                </div> 
+                <!-- </form> -->
+          </template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" v-on:click="getUserForModal(user.id, 'delete')">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<!-- End Modal Delete-->
 </div>
 
 <?php

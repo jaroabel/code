@@ -12,7 +12,7 @@ function searchUser( $data ) {
     $call = new Queries;
 
     if( $data['action'] == "getuser") {
-        $arr['user'] = $call->find_user_by_id( $data );
+        $arr['user'] = $call->find_user_by_id( $data['uid'] );
     }
     
     

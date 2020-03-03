@@ -20,7 +20,7 @@ var app = new Vue({
       step: 3,
 
       showusers: [],
-      modaluser: []
+      modalusers: []
     },
     methods: {
         mouseleave: function () {
@@ -121,8 +121,7 @@ var app = new Vue({
 
         /* get user data for modal */
         getUserForModal: function( id, action) {
-            //modaluser
-            
+
             const params = {
                 uid:  id,
                 action: action
@@ -134,8 +133,8 @@ var app = new Vue({
                 },
               })
               .then((response) => {
-                    app.modaluser = response.data.user;
-                    console.dir(app.modaluser);
+                    app.modalusers = response.data.user;
+                    console.dir(app.modalusers);
                 }, (error) => {
                   console.log(error);
                 });
@@ -152,6 +151,9 @@ var app = new Vue({
                 this.fnum = prev + this.step;
                 this.snum = next + this.step;
             }
+        },
+        remove: function () {
+            this.modalusers.length = 0;
         }
 
 
