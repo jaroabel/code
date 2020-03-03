@@ -77,7 +77,7 @@ class Queries extends \Classes\Config\Dbconn {
         return $users;
     }
 
-    // Find single user by ID
+    // Find single user by ID - action call when click on the user update button
     public function find_user_by_id( $id ) {
         $users = [];
         try{
@@ -89,7 +89,7 @@ class Queries extends \Classes\Config\Dbconn {
             if ($result->num_rows === 0) {
                 $row = $result->num_rows;
             } else {
-                //$row = $result->fetch_assoc();
+
                 while ($row = $result->fetch_assoc()) {
                     array_push($users, $row);
                 }
@@ -125,6 +125,22 @@ class Queries extends \Classes\Config\Dbconn {
             die();
         }
         return $users;
+    }
+
+    // Get all user
+    public function delete_user( $id ) {
+
+        try{
+
+            $stmt = $this->conn->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->close();
+        } catch(\Exception $e) {
+            echo $e->__toString();
+            die();
+        }
+        return true;
     }
 
 }

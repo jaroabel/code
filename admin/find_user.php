@@ -80,7 +80,7 @@ include('includes/header.php');
                             <div class="form-inline"> 
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="getUserForModal(user.id, 'getuser')">Update</button>
                                 &nbsp; 
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeleteUser" :value="user.id">Delete</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeleteUser" :value="user.id" v-on:click="setDeleteValue(user.id, user.email)">Delete</button>
                                 
                             </div>
                         </td>
@@ -132,29 +132,24 @@ include('includes/header.php');
                     <div class="form-row mb-4">
                         <div class="col">
                             <!-- First name -->
-                            <input name="fname" type="text" id="fname" class="form-control" :value="toupdate.fname">
+                            <input name="upfname" type="text" id="upfname" class="form-control" :value="toupdate.fname">
                         </div>
                         <div class="col">
                             <!-- Last name -->
-                            <input name="lname" type="text" id="lname" class="form-control" :value="toupdate.lname">
+                            <input name="uplname" type="text" id="uplname" class="form-control" :value="toupdate.lname">
                         </div>
                     </div>
 
                     <!-- E-mail -->
-                    <input name="email" type="email" id="email" class="form-control mb-4" :value="toupdate.email">
+                    <input name="upemail" type="email" id="upemail" class="form-control mb-4" :value="toupdate.email">
 
                     <!-- Username -->
-                    <input name="username" type="input" id="username" class="form-control mb-4" :value="toupdate.username">
+                    <input name="upusername" type="input" id="upusername" class="form-control mb-4" :value="toupdate.username">
 
                     <!-- User permission rank -->
-                
-                    <select class="form-control" id="rank" name="rank">
+                    <select class="form-control" id="uprank" name="rank">
                     <option value="">Select User permission</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option v-for="rnum in arrRank" value="rnum" :selected="toupdate.rank === rnum">{{rnum}}</option>
                     </select>
 
 
@@ -188,50 +183,14 @@ include('includes/header.php');
         </button>
       </div>
       <div class="modal-body">
-          <template  v-for="toupdate in modalusers">
-              <!-- <form class="text-center border border-light p-5"> -->
-                <div class="text-center border border-light p-5">
-
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <!-- First name -->
-                            <input name="fname" type="text" id="fname" class="form-control" :value="toupdate.fname">
-                        </div>
-                        <div class="col">
-                            <!-- Last name -->
-                            <input name="lname" type="text" id="lname" class="form-control" :value="toupdate.lname">
-                        </div>
-                    </div>
-
-                    <!-- E-mail -->
-                    <input name="email" type="email" id="email" class="form-control mb-4" :value="toupdate.email">
-
-                    <!-- Username -->
-                    <input name="username" type="input" id="username" class="form-control mb-4" :value="toupdate.username">
-
-                    <!-- User permission rank -->
-                
-                    <select class="form-control" id="rank" name="rank">
-                    <option value="">Select User permission</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    </select>
-
-
-                    <!-- Sign up button -->
-                    <input type="hidden" name="action" :value="toupdate.id"> 
-
-                    <hr>
-                </div> 
-                <!-- </form> -->
-          </template>
+        Are you sure you want to delete this user?<br>
+        {{ email }}
       </div>
       <div class="modal-footer">
+        <input type="hidden" name="deluid" id="deluid" :value="userid">
+
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" v-on:click="getUserForModal(user.id, 'delete')">Delete</button>
+        <button type="button" class="btn btn-danger" v-on:click="deleteUserForModal(userid, 'delete')">Delete</button>
       </div>
     </div>
   </div>

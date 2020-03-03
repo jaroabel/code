@@ -2,6 +2,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+      userid: '',
       message: '',
       username: '',
       email: '',
@@ -9,7 +10,9 @@ var app = new Vue({
       fname: '',
       lname: '',
       rank: '',
+
       action: '',
+      secondAction: '',
 
       /* Array var */
       arr_result: true,
@@ -20,7 +23,8 @@ var app = new Vue({
       step: 3,
 
       showusers: [],
-      modalusers: []
+      modalusers: [],
+      arrRank: [ 1, 2, 3, 4, 5]
     },
     methods: {
         mouseleave: function () {
@@ -78,17 +82,19 @@ var app = new Vue({
                 this.arr_result = true;
                 this.email = '';
                 this.arr_length = 0;   
-                this.showusers = [];      
+                this.showusers = [];  
+                    
             }
             
-
+            this.secondAction = '';
         },
 
         /* Search for a single user or list all users */
         searchUser: function ( click_action) {
 
             var uemail = document.querySelector("#email").value;
-            
+            this.secondAction = click_action;
+
             const params = {
                 email:  uemail,
                 action: click_action
@@ -140,6 +146,31 @@ var app = new Vue({
                 });
         },
 
+        /* get user data for modal */
+        deleteUserForModal: function( id, action) {
+
+            const params = {
+                uid:  id,
+                action: action,
+                action_two: this.secondAction
+            };
+
+            alert("User ID ==> " + params.uid + " Action ==> " + params.action + " Action 2 ==> " + params.action_two);
+            /*
+            axios.post('/admin/vue_update_delete.php', params, {
+                headers: {
+                    'content-type': 'application/json',
+                },
+              })
+              .then((response) => {
+                    app.modalusers = response.data.user;
+                    console.dir(app.modalusers);
+                }, (error) => {
+                  console.log(error);
+                });
+            */
+        },
+
         /* Set 'Previous' and 'Next' button for user list display on page */
         navigateSearch: function ( prev, next, action ){
 
@@ -152,6 +183,12 @@ var app = new Vue({
                 this.snum = next + this.step;
             }
         },
+
+        setDeleteValue: function ( uid, uemail) {
+            this.userid = uid;
+            this.email = uemail;
+        },
+
         remove: function () {
             this.modalusers.length = 0;
         }

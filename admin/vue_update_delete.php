@@ -11,8 +11,17 @@ function searchUser( $data ) {
     $arr = [];
     $call = new Queries;
 
-    if( $data['action'] == "getuser") {
-        $arr['user'] = $call->find_user_by_id( $data['uid'] );
+    switch ($data['action']) {
+        case 'getuser':
+                $arr['user'] = $call->find_user_by_id( $data['uid'] );
+            break;
+
+        case 'delete':
+
+            $call->delete_user( $data['uid'] );
+            $arr['user'] = $call->find_user_by_id( $data['uid'] );
+
+            break; 
     }
     
     

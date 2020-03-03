@@ -4,6 +4,7 @@ namespace Classes;
 
 use \Classes\Controllers\Finduser;
 
+
 include_once("includes/admin_init.php");
 
 function searchUser( $data ) {
