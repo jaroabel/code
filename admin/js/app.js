@@ -152,23 +152,36 @@ var app = new Vue({
             const params = {
                 uid:  id,
                 action: action,
-                action_two: this.secondAction
+                action_two: this.secondAction,
+                email: this.email
             };
 
-            alert("User ID ==> " + params.uid + " Action ==> " + params.action + " Action 2 ==> " + params.action_two);
-            /*
+            //alert("User ID ==> " + params.uid + " Action ==> " + params.action + " Action 2 ==> " + params.action_two + " Email ==> " + params.email);
+            
             axios.post('/admin/vue_update_delete.php', params, {
                 headers: {
                     'content-type': 'application/json',
                 },
               })
               .then((response) => {
-                    app.modalusers = response.data.user;
-                    console.dir(app.modalusers);
+                app.showusers = response.data.users;
+                if(app.showusers.length < 1){
+
+                    app.arr_length = 0;
+                    app.arr_result = false;
+                    app.email = uemail;
+
+                } else {
+
+                    app.arr_length = app.showusers.length;
+                    app.arr_result = true;
+                    app.email = '';
+                }
+                    console.dir(app.showusers);
                 }, (error) => {
                   console.log(error);
                 });
-            */
+            
         },
 
         /* Set 'Previous' and 'Next' button for user list display on page */

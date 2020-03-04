@@ -188,9 +188,10 @@ include('includes/header.php');
       </div>
       <div class="modal-footer">
         <input type="hidden" name="deluid" id="deluid" :value="userid">
+        <input type="hidden" name="deluid" id="delemail" :value="email">
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" v-on:click="deleteUserForModal(userid, 'delete')">Delete</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" v-on:click="deleteUserForModal(userid, 'delete')">Delete</button>
       </div>
     </div>
   </div>
