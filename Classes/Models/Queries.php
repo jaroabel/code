@@ -38,9 +38,6 @@ class Queries extends \Classes\Config\Dbconn {
     // insert new user (create new account)
     public function add_user( $data ) {
 
-        //echo "In add_user query function<br>";
-       // print_r( $data );
-       // die();
         try {
             $stmt = $this->conn->prepare("INSERT INTO users (fname, lname, username, email, password, rank ) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssi", $data['fname'], $data['lname'], $data['username'], $data['email'], $data['password'], $data['rank']);
@@ -55,8 +52,9 @@ class Queries extends \Classes\Config\Dbconn {
         return $insert_id;
     }
 
+    // Find single user by email
     public function find_user( $email ) {
-
+        $users = [];
         try{
             $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->bind_param( "s", $email);
@@ -66,14 +64,67 @@ class Queries extends \Classes\Config\Dbconn {
             if ($result->num_rows === 0) {
                 $row = $result->num_rows;
             } else {
-                $row = $result->fetch_assoc();
+                //$row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $row);
+                }
             }
             $stmt->close();
         } catch(\Exception $e) {
             echo $e->__toString();
             die();
         }
-        return $row;
+        return $users;
+    }
+
+    // Find single user by ID
+    public function find_user_by_id( $id ) {
+        $users = [];
+        try{
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
+            $stmt->bind_param( "i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                $row = $result->num_rows;
+            } else {
+                //$row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $row);
+                }
+            }
+            $stmt->close();
+        } catch(\Exception $e) {
+            echo $e->__toString();
+            die();
+        }
+        return $users;
+    }
+
+    // Get all user
+    public function get_all_user() {
+
+        $users = [];
+        try{
+            $stmt = $this->conn->prepare("SELECT * FROM users");
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                $row = $result->num_rows;
+            } else {
+                //$row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $row);
+                }
+            }
+            $stmt->close();
+        } catch(\Exception $e) {
+            echo $e->__toString();
+            die();
+        }
+        return $users;
     }
 
 }
