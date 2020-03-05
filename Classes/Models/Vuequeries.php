@@ -43,7 +43,7 @@ class Vuequeries extends \Classes\Config\Dbconn {
             $result = $stmt->get_result();
     
             if ($result->num_rows === 0) {
-                $users = $result->num_rows;
+                $row = $result->num_rows;
             } else {
                     
                 while ($row = $result->fetch_assoc()) {

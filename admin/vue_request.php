@@ -18,6 +18,7 @@ function process_vue_request( $data ) {
     switch ($data['action']) {
 
         case 'findemail':
+            //$arr['users']['email'] = $data['email'];
             $arr['users'] = find_user_by_email( $data['email'], $call );
             break;
 

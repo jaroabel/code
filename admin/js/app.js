@@ -155,7 +155,7 @@ var app = new Vue({
 
                         app.arr_length = 0;
                         app.arr_result = false;
-                        app.email = uemail;
+                        app.email = email;
 
                     } else {
 
@@ -199,7 +199,8 @@ var app = new Vue({
                 uid:  id,
                 email: email,
                 action: action,
-                action_two: this.secondAction
+                action_two: this.secondAction,
+                email: this.email
             };
 
             axios.post('/admin/vue_request.php', params, {
