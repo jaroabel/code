@@ -61,7 +61,7 @@ include('includes/header.php');
 
 
     <!-- Sign up button -->
-    <input type="hidden" name="action" value="newaccount"> 
+    <input type="hidden" name="action" id="action" value="newaccount"> 
     <button class="btn btn-info my-4 btn-block" v-on:click="checkNewUser">Create account</button>
 
     <hr>

@@ -39,7 +39,10 @@ require_once("admin_init.php");
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="new_account.php">New Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="find_user.php">Users</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

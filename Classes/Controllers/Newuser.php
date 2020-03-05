@@ -3,7 +3,7 @@
 namespace Classes\Controllers;
 
 
-class Newuser extends \Classes\Models\Queries {
+class Newuser extends \Classes\Models\Vuequeries {
 
 
     public function create_new_user( $data ) {
