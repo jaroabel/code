@@ -119,7 +119,7 @@ include('includes/header.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update user</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update user - {{ message }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -139,7 +139,7 @@ include('includes/header.php');
                             <input name="uplname" type="text" id="uplname" class="form-control" :value="toupdate.lname">
                         </div>
                     </div>
-
+                    
                     <!-- E-mail -->
                     <input name="upemail" type="email" id="upemail" class="form-control mb-4" :value="toupdate.email">
 
@@ -149,12 +149,13 @@ include('includes/header.php');
                     <!-- User permission rank -->
                     <select class="form-control" id="uprank" name="rank">
                     <option value="">Select User permission</option>
-                    <option v-for="rnum in arrRank" value="rnum" :selected="toupdate.rank === rnum">{{rnum}}</option>
+                    <option v-for="rnum in arrRank" :value="rnum" :selected="toupdate.rank === rnum">{{rnum}}</option>
                     </select>
 
-
+                    
                     <!-- Sign up button -->
-                    <input type="hidden" name="action" :value="toupdate.id"> 
+                    <input type="hidden" name="updateid" id="updateid" :value="toupdate.id"> 
+                    <input type="hidden" name="action" id="action" value="update"> 
 
                     <hr>
                 </div> 
@@ -163,7 +164,7 @@ include('includes/header.php');
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" v-on:click="getUserForModal(modalusers.id, 'update')">Save changes</button>
+        <button type="button" class="btn btn-primary" v-on:click="sendUserUpdateData('update')">Save changes</button>
       </div>
     </div>
   </div>
@@ -188,9 +189,10 @@ include('includes/header.php');
       </div>
       <div class="modal-footer">
         <input type="hidden" name="deluid" id="deluid" :value="userid">
+        <input type="hidden" name="delemail" id="delemail" :value="email">
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" v-on:click="deleteUserForModal(userid, 'delete')">Delete</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" v-on:click="deleteUserForModal(userid, 'delete')">Delete</button>
       </div>
     </div>
   </div>
