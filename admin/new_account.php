@@ -16,7 +16,7 @@ include('includes/header.php');
 
       <div class="card">
         <div class="card-header">
-          Featured {{ message }}
+          Featured {{ arrMessage.msg }}
         </div>
         <div class="card-body">
           <!-- THE FORM -->

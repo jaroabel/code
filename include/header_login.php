@@ -13,7 +13,16 @@ require_once("init.php");
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+    <!-- Vue js -->
+   <!--Vue js development version, includes helpful console warnings -->
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+   <!-- Vue js production version, optimized for size and speed -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+   <!-- axios -->
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>JMABEL</title>
   </head>
   <body>

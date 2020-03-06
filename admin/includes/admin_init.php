@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 define("DOC_ROOT",   $_SERVER['DOCUMENT_ROOT'] );
 define("DOTS",  ".." );

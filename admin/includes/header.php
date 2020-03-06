@@ -1,6 +1,18 @@
 <?php
 
+namespace Classes\Config;
+
+use \Classes\Config\Auth;
+use \Classes\Config\Redirect;
+
 require_once("admin_init.php");
+
+$val = new Auth;
+$red = new Redirect;
+
+if( $val->getSess_uid() == ""){
+  $red::redirect( "../../index.php" );
+}
 
 ?>
 

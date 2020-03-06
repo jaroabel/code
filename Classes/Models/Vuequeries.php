@@ -20,9 +20,10 @@ class Vuequeries extends \Classes\Config\Dbconn {
     // insert new user (create new account)
     public function add_user( $data ) {
 
+        $pass = password_hash($data['password'], PASSWORD_DEFAULT);
         try {
             $stmt = $this->conn->prepare("INSERT INTO users (fname, lname, username, email, password, rank ) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssi", $data['fname'], $data['lname'], $data['username'], $data['email'], $data['password'], $data['rank']);
+            $stmt->bind_param("sssssi", $data['fname'], $data['lname'], $data['username'], $data['email'], $pass, $data['rank']);
             $stmt->execute();
             $insert_id = $this->conn->insert_id;
             $stmt->close();
@@ -43,7 +44,7 @@ class Vuequeries extends \Classes\Config\Dbconn {
             $result = $stmt->get_result();
     
             if ($result->num_rows === 0) {
-                $row = $result->num_rows;
+                $users = $result->num_rows;
             } else {
                     
                 while ($row = $result->fetch_assoc()) {

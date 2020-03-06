@@ -60,7 +60,7 @@ var app = new Vue({
                 },
               })
               .then((response) => {
-                    app.message = response.data.users;
+                    app.arrMessage = response.data.users;
                     this.clearForm('addForm');
                     console.log(response);
                 }, (error) => {

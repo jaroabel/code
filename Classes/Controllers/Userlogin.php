@@ -11,16 +11,26 @@ class Userlogin extends \Classes\Models\Queries {
 
         $result = $this->validate_user( $data['email'] );
 
-        if( $result['password'] == $data['password']){
-            $this->message['err'] = 0;
-            $this->message['msg'] = "You are allowed in";
-            $this->message['data'] = $result;
-            $this->message['url'] = "admin/index.php";
+
+
+        if( $result !== 0 ) {
+            if (password_verify($data['password'], $result['password'])) {
+                
+                $sess = new \Classes\Config\Auth;
+                $sess->setSession( $result['id'], $result['fname'], $result['rank']);
+
+                $this->message['err'] = 0;
+                $this->message['url'] = "admin/index.php";
+
+            } else {
+
+                $this->message['err'] = 1;
+                $this->message['url'] = "index.php";
+            }            
         } else {
             $this->message['err'] = 1;
             $this->message['msg'] = "You are NOT allowed in";
-            $this->message['url'] = "index.php";
-            
+            $this->message['url'] = "index.php";            
         }
 
         return $this->message;

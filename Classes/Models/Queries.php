@@ -25,31 +25,15 @@ class Queries extends \Classes\Config\Dbconn {
         $result = $stmt->get_result();
 
         if ($result->num_rows === 0) {
-            $this->err['msg'] = "No result found";
-            return $this->err['msg'];
+            //$this->err['msg'] = "No result found";
+            //return $this->err['msg'];
+            $row = $result->num_rows;
         } else {
             $row = $result->fetch_assoc();
         }
         $stmt->close();
 
         return $row;
-    }
-
-    // insert new user (create new account)
-    public function add_user( $data ) {
-
-        try {
-            $stmt = $this->conn->prepare("INSERT INTO users (fname, lname, username, email, password, rank ) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssi", $data['fname'], $data['lname'], $data['username'], $data['email'], $data['password'], $data['rank']);
-            $stmt->execute();
-            $insert_id = $this->conn->insert_id;
-            $stmt->close();
-        } catch(\Exception $e) {
-            echo $e->__toString();
-            die();
-        }
-
-        return $insert_id;
     }
 
 }
