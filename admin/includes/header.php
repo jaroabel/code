@@ -10,10 +10,10 @@ require_once("admin_init.php");
 $val = new Auth;
 $red = new Redirect;
 
-if( $val->getSess_uid() == ""){
+
+if( $_SESSION['uid'] == ""){
   $red::redirect( "../../index.php" );
 }
-
 ?>
 
 <!doctype html>
@@ -39,7 +39,7 @@ if( $val->getSess_uid() == ""){
     <title>JMABEL</title>
   </head>
   <body>
-
+<div id="app">
 <!-- Test new navbar -->
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -77,17 +77,20 @@ if( $val->getSess_uid() == ""){
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Logout</a>
+          <!-- <a class="dropdown-item" href="../admin_processes.php"> Logout </a> -->
         </div>
       </li>
 
     </ul>
     <!-- Links -->
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <div class="form-inline my-2 my-lg-0">
+      <form action="../admin/admin_processes.php" method="post">
+      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+      <input type="hidden" name="action" id="action" value="userlogout">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Logout</button>
+      </form>
+    </div>
   </div>
   <!-- Collapsible content -->
 

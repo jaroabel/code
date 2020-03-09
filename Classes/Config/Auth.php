@@ -8,16 +8,6 @@ class Auth {
     public $sess_fname;
     public $sess_rank;
     public $sess_out;
-    
-    public function setSession( $id, $fname, $rank) {
-        $_SESSION['uid'] = $id;
-        $_SESSION['fname'] = $fname;
-        $_SESSION['rank'] = $rank;
-
-        $this->setSess_uid($_SESSION['uid']);
-        $this->setSess_fname($_SESSION['fname']);
-        $this->setSess_rank($_SESSION['rank']);
-    }
 
 
     /**
@@ -25,10 +15,10 @@ class Auth {
      *
      * @return  self
      */ 
-    public function setSess_uid($sess_uid)
+    public function setSess_uid( $sess_uid )
     {
-        $this->sess_uid = $sess_uid;
-
+        $_SESSION['uid'] = $sess_uid;
+        $this->sess_uid = $_SESSION['uid'];
         return $this;
     }
 
@@ -37,9 +27,10 @@ class Auth {
      *
      * @return  self
      */ 
-    public function setSess_fname($sess_fname)
+    public function setSess_fname( $sess_fname)
     {
-        $this->sess_fname = $sess_fname;
+        $_SESSION['fname'] = $sess_fname;
+        $this->sess_fname = $_SESSION['fname'];
 
         return $this;
     }
@@ -49,9 +40,10 @@ class Auth {
      *
      * @return  self
      */ 
-    public function setSess_rank($sess_rank)
+    public function setSess_rank( $sess_rank )
     {
-        $this->sess_rank = $sess_rank;
+        $_SESSION['rank'] = $sess_rank;
+        $this->sess_rank = $_SESSION['rank'];
 
         return $this;
     }

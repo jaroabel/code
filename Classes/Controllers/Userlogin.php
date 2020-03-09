@@ -16,9 +16,15 @@ class Userlogin extends \Classes\Models\Queries {
         if( $result !== 0 ) {
             if (password_verify($data['password'], $result['password'])) {
                 
-                $sess = new \Classes\Config\Auth;
-                $sess->setSession( $result['id'], $result['fname'], $result['rank']);
+                
 
+                $sess = new \Classes\Config\Auth();
+                $sess->setSess_uid( $result['id'] ) ;
+                $sess->setSess_fname( $result['fname'] );
+                $sess->setSess_rank( $result['rank'] );
+
+                //print_r($result);
+                //die();
                 $this->message['err'] = 0;
                 $this->message['url'] = "admin/index.php";
 

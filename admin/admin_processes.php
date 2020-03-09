@@ -8,6 +8,9 @@ switch ($_POST['action']) {
     case 'newaccount':
             createuser( $_POST );
         break;
+    case 'userlogout':
+            logout_user( $_POST );
+        break;
     
     default:
         # code...
@@ -26,4 +29,17 @@ function createuser( $data ) {
     $redir::redirect( $result['url'] );
     exit;
 
+}
+
+function logout_user() {
+
+    unset($_SESSION['uid']);
+    unset($_SESSION['fname']);
+    unset($_SESSION['rank']);
+    session_destroy();
+
+    $url = "../index.php";
+    $redir = new \Classes\Config\Redirect;
+    $redir::redirect( $url );
+    exit;
 }

@@ -6,6 +6,7 @@ use \Classes\Models\Vuequeries;
 use \Classes\Controllers\Newuser;
 
 
+
 include_once("includes/admin_init.php");
 
 
@@ -40,6 +41,10 @@ function process_vue_request( $data ) {
 
         case 'update':
             $arr['users'] = update_user_info( $data, $call );
+            break;
+
+        case 'userlogout':
+            $arr['users'] = logout_user();
             break;
 
         default:
@@ -115,7 +120,22 @@ function check_and_add_user( $data, $call ) {
         return $message;
 
     } 
+
 }
+
+function logout_user() {
+
+    unset($_SESSION['uid']);
+    unset($_SESSION['fname']);
+    unset($_SESSION['rank']);
+    session_destroy();
+
+    $url = "../index.php";
+    $redir = new \Classes\Config\Redirect;
+    $redir::redirect( $url );
+    exit;
+}
+
 
 /** Update user profile  */
 function update_user_info( $data, $call ) {

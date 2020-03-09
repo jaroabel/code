@@ -26,6 +26,7 @@ require_once("init.php");
     <title>JMABEL</title>
   </head>
   <body>
+  <div>  
 <!-- Image and text -->
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">

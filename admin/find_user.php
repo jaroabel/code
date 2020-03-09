@@ -5,7 +5,7 @@ include('includes/header.php');
 
 ?>
 
-<div id="app">
+<div>
 
 <div class="row">
     <div class="col">

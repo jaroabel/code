@@ -4,7 +4,7 @@ include('includes/header.php');
 
 ?>
 
-<div id="app">
+<div>
 
 <div class="row">
         <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">

@@ -2,31 +2,32 @@
 var app = new Vue({
     el: '#app',
     data: {
-      userid: '',
-      message: '',
-      username: '',
-      email: '',
-      password: '',
-      fname: '',
-      lname: '',
-      rank: '',
+        userid: '',
+        message: '',
+        username: '',
+        email: '',
+        password: '',
+        fname: '',
+        lname: '',
+        rank: '',
 
-      action: '',
-      secondAction: '',
-      delEmail: '',
+        action: '',
+        secondAction: '',
+        delEmail: '',
 
-      /* Array var */
-      arr_result: true,
-      arr_length: 0,
-      fnum : 0,
-      snum : 3,
+        /* Array var */
+        arr_result: true,
+        arr_length: 0,
+        fnum : 0,
+        snum : 3,
 
-      step: 3,
+        step: 3,
 
-      showusers: [],
-      modalusers: [],
-      arrMessage: [],
-      arrRank: [ 1, 2, 3, 4, 5]
+        showusers: [],
+        modalusers: [],
+        arrMessage: [],
+        arrRank: [ 1, 2, 3, 4, 5],
+        headerData: []
     },
     methods: {
         mouseleave: function () {
