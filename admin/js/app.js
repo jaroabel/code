@@ -70,7 +70,7 @@ var app = new Vue({
         },
 
         /** Action to update user data  */
-        sendUserUpdateData: function ( id, upaction ) {
+        sendUserUpdateData: function ( upaction ) {
 
             var ufname  = document.querySelector("#upfname").value;
             var ulname  = document.querySelector("#uplname").value;
@@ -78,7 +78,9 @@ var app = new Vue({
             var uname   = document.querySelector("#upusername").value;
             var urank   = document.querySelector("#uprank").value;
             var action  = upaction;
-            var upid    = document.querySelector("#updateid").value;;
+            var upid    = document.querySelector("#updateid").value;
+            var curemail    = document.querySelector("#curemail").value;
+            
             
             const params = {
                 fname:    ufname,
@@ -87,7 +89,8 @@ var app = new Vue({
                 username: uname ,
                 uid:      upid,
                 rank:     urank,
-                action:   action
+                action:   action,
+                cemail: curemail
             };
 
            // alert(" Data ==> " + params.fname +" = "+ params.lname +" = "+ params.email +" = "+ params.username +" = "+ params.uid +" = "+ params.rank +" = "+ params.action); 
@@ -100,9 +103,13 @@ var app = new Vue({
               })
               .then((response) => {
                     app.arrMessage = response.data.users;
-                    alert(app.arrMessage );
+
+                    if( app.arrMessage.ufind < 1 ){
+                        alert("Close modal")
+                    }
+                    //alert(app.arrMessage.msg );
                     //this.clearForm('addForm');
-                    console.log(response);
+                    console.log(app.arrMessage.msg);
                 }, (error) => {
                   console.log(error);
                 });

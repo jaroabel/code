@@ -140,13 +140,19 @@ function logout_user() {
 /** Update user profile  */
 function update_user_info( $data, $call ) {
 
-    $res = $call->select_user_by_email( $data['email'] );
+    $res = 0;
+
+    if( $data['cemail'] !== $data['email']){
+        $res = $call->select_user_by_email( $data['email'] );
+    }
+    
 
     $message = [];
 
     if( $res > 0){
 
         $message['msg'] =  " - This email address already exist!";
+        $message['ufind'] = 1;
         return $message;
 
     } else {
@@ -155,6 +161,7 @@ function update_user_info( $data, $call ) {
         //$addID = $qry_add->create_new_user( $data );
         
         $message['msg'] =  " - User was updated!";
+        $message['ufind'] = 0;
         return $message;
 
     } 

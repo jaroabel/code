@@ -119,7 +119,7 @@ include('includes/header.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update user - {{ message }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update user {{ arrMessage.msg }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -155,6 +155,8 @@ include('includes/header.php');
                     
                     <!-- Sign up button -->
                     <input type="hidden" name="updateid" id="updateid" :value="toupdate.id"> 
+                    <input type="hidden" name="curemail" id="curemail" :value="toupdate.email"> 
+                    
                     <input type="hidden" name="action" id="action" value="update"> 
 
                     <hr>
