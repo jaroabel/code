@@ -93,9 +93,6 @@ var app = new Vue({
                 cemail: curemail
             };
 
-           // alert(" Data ==> " + params.fname +" = "+ params.lname +" = "+ params.email +" = "+ params.username +" = "+ params.uid +" = "+ params.rank +" = "+ params.action); 
-
-            
             axios.post('/admin/vue_request.php', params, {
                 headers: {
                     'content-type': 'application/json',
@@ -106,6 +103,8 @@ var app = new Vue({
 
                     if( app.arrMessage.ufind < 1 ){
                         alert("Close modal")
+                        this.clearForm('finduser');
+                        this.searchUser('findall')
                     }
                     //alert(app.arrMessage.msg );
                     //this.clearForm('addForm');
@@ -115,7 +114,7 @@ var app = new Vue({
                 });
                 
         },
-
+        
         /* Clear form */
         clearForm: function ( clear ) {
 

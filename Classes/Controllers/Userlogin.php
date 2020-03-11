@@ -16,12 +16,16 @@ class Userlogin extends \Classes\Models\Queries {
         if( $result !== 0 ) {
             if (password_verify($data['password'], $result['password'])) {
                 
-                
+                session_start();
+
+                $_SESSION['uid'] = $result['id'];
+                $_SESSION['fname'] = $result['fname'];
+                $_SESSION['rank'] = $result['rank'];
 
                 $sess = new \Classes\Config\Auth();
-                $sess->setSess_uid( $result['id'] ) ;
-                $sess->setSess_fname( $result['fname'] );
-                $sess->setSess_rank( $result['rank'] );
+                $sess->setSess_uid( $_SESSION['uid'] ) ;
+                $sess->setSess_fname( $_SESSION['fname'] );
+                $sess->setSess_rank( $_SESSION['rank'] );
 
                 //print_r($result);
                 //die();

@@ -157,11 +157,18 @@ function update_user_info( $data, $call ) {
 
     } else {
 
-        //$qry_add = new Newuser;
-        //$addID = $qry_add->create_new_user( $data );
+        $qry_update = new \Classes\Models\Vuequeries;
+        $uUpdate = $qry_update->update_user_by_id( $data );
+
+        if( $uUpdate) {
+            $message['msg'] =  " - User was updated!";
+            $message['ufind'] = 0;
+        } else {
+            $message['msg'] =  " - There was an issue updating user!";
+            $message['ufind'] = 1;
+        }
         
-        $message['msg'] =  " - User was updated!";
-        $message['ufind'] = 0;
+
         return $message;
 
     } 

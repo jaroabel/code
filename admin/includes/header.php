@@ -59,7 +59,7 @@ if( $_SESSION['uid'] == ""){
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home
+        <a class="nav-link" href="index.php">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>

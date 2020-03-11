@@ -132,7 +132,7 @@ class Vuequeries extends \Classes\Config\Dbconn {
 
         try{ 
             $stmt = $this->conn->prepare("UPDATE users SET fname = ?, lname = ?, username = ?, email = ?, rank = ? WHERE id = ?");
-            $stmt->bind_param("ssssii", $_POST['name'], $_SESSION['id']);
+            $stmt->bind_param("ssssii", $data['fname'], $data['lname'], $data['username'], $data['email'], $data['rank'], $data['uid'] );
             $stmt->execute();
             $stmt->close();
         } catch(\Exception $e) {

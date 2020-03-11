@@ -17,8 +17,7 @@ class Auth {
      */ 
     public function setSess_uid( $sess_uid )
     {
-        $_SESSION['uid'] = $sess_uid;
-        $this->sess_uid = $_SESSION['uid'];
+        $this->sess_uid = $sess_uid;
         return $this;
     }
 
@@ -29,8 +28,7 @@ class Auth {
      */ 
     public function setSess_fname( $sess_fname)
     {
-        $_SESSION['fname'] = $sess_fname;
-        $this->sess_fname = $_SESSION['fname'];
+        $this->sess_fname = $sess_fname;
 
         return $this;
     }
@@ -42,8 +40,7 @@ class Auth {
      */ 
     public function setSess_rank( $sess_rank )
     {
-        $_SESSION['rank'] = $sess_rank;
-        $this->sess_rank = $_SESSION['rank'];
+        $this->sess_rank = $sess_rank;
 
         return $this;
     }
