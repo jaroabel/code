@@ -22,27 +22,28 @@ if( isset($_SESSION['rank'])) {
                     <div class="col">
                         <!-- card 1 -->
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="images/add_user.png" class="card-img-top" alt="Add user">
                             <div class="card-body">
-                                <h5 class="card-title">Card title Rank 1</h5>
+                                <h5 class="card-title">Add new user</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="new_account.php" class="btn btn-primary">Add user</a>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <!-- card 2 -->
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="images/manage_users.png" class="card-img-top" alt="Manage Users">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">Manage all users</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="find_user.php" class="btn btn-primary">Manage user</a>
                             </div>
                         </div>
                     </div>
+                    <!-- caer 3
                     <div class="col">
-                        <!-- card 3 -->
+                        
                         <div class="card" style="width: 18rem;">
                             <img src="..." class="card-img-top" alt="...">
                             <div class="card-body">
@@ -52,6 +53,7 @@ if( isset($_SESSION['rank'])) {
                             </div>
                         </div>
                     </div>
+                -->
                 </div>
                 <?php } elseif( $val_rank === 2 ){ ?>
                 <!-- RANK 2 MENU -->
